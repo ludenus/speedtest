@@ -1,5 +1,8 @@
 FROM ubuntu:18.04
 
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
 # https://www.speedtest.net/apps/cli
 RUN apt-get update                                                 &&\
     apt-get install -y                                               \
@@ -18,4 +21,8 @@ RUN apt-get update                                                 &&\
     apt-get update                                                 &&\
     apt-get install -y speedtest
 
-ENTRYPOINT ["bash", "-c", "speedtest", ]
+COPY speedtest-cli.json /root/.config/ookla/speedtest-cli.json
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
