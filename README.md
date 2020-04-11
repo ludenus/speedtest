@@ -1,16 +1,16 @@
 # speedtest
-debian package from https://www.speedtest.net/apps/cli
+debian package from https://www.speedtest.net/apps/cli installed on ubuntu 18.04
 
 ## How to Run
 
 ### Run speedtest with default settings
 ```
-$ docker run -ti speedtest:latest
+$ docker run -ti ludenus/speedtest:1.0.0.2
 ```
 
 ### List nearest servers
 ```
-$ docker run -ti speedtest:latest --servers
+$ docker run -ti ludenus/speedtest:1.0.0.2 --servers
 + speedtest --servers
 
 Closest servers:
@@ -23,10 +23,10 @@ Closest servers:
 
 ### Run speedtest against specified server id:
 ```
-$ docker run -ti ludenus/speedtest:latest --server-id=9332
+$ docker run -ti ludenus/speedtest:1.0.0.2 --server-id=9332
 ```
 
 ### Help
 ```
-$ docker run -ti ludenus/speedtest:latest --help
+$ docker run -ti ludenus/speedtest:1.0.0.2 --help
 ```
