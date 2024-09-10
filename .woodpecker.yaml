@@ -1,0 +1,26 @@
+clone:
+  # https://github.com/woodpecker-ci/plugin-git/blob/main/docs.md
+  - name: git
+    image: woodpeckerci/plugin-git
+    settings:
+      partial: false
+      tags: true
+
+steps:
+  - name: build
+    image: docker.io/ludenus/speedtest:0.0.2
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/root/.docker/config.json
+    commands:
+      - |
+          set -x
+          set -e
+          if [ -z "$VERSION" ]; then
+            [ -z "`git tag -l`" ] && git tag 0.0.1
+            VERSION="`git describe --tags`"
+          fi
+          docker build -t docker.io/ludenus/speedtest:$VERSION .
+          docker push     docker.io/ludenus/speedtest:$VERSION
+          docker rmi      docker.io/ludenus/speedtest:$VERSION
+

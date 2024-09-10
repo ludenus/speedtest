@@ -1,3 +1,3 @@
 #!/bin/bash -ex
 
-speedtest $@
+exec speedtest $@
